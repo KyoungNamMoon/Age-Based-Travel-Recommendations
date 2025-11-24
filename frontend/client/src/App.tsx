@@ -74,7 +74,7 @@ export default function App() {
             </div>
           </div>
         </header>
-
+        
         {/* Hero Section with Search */}
         <section className="relative bg-gradient-to-br from-blue-600 via-blue-700 to-purple-700 text-white py-12 min-h-[400px] flex items-center">
           <div className="max-w-4xl mx-auto px-4 w-full">
@@ -89,6 +89,8 @@ export default function App() {
           </div>
         </section>
 
+
+        
         {/* Recent Searches Section */}
         <section className="bg-white py-8">
           <RecentSearches />

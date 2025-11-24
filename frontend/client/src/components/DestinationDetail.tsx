@@ -1,9 +1,11 @@
 import { useNavigate, useParams } from "react-router-dom";
-import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Star, Users, Plane } from "lucide-react";
+import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Star, Users, Plane, ChevronLeft, ChevronRight } from "lucide-react";
+import { useRef, useState, useEffect} from "react";
 
 interface DetailData {
   [key: string]: {
     name: string;
+    englishname: string;
     country: string;
     description: string;
     imageUrl: string;
@@ -19,13 +21,10 @@ interface DetailData {
   };
 }
 
-export function DestinationDetail() {
-  const navigate = useNavigate();
-  const { destinationId } = useParams();
-
-  const destinationData: DetailData = {
+const destinationData: DetailData = {
     "부탄": {
       name: "부탄",
+      englishname: "Bhutan",
       country: "부탄",
       description: "히말라야의 평화로운 불교 왕국",
       imageUrl: "https://images.unsplash.com/photo-1699359104603-14a5607966bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdWx0dXJhbCUyMHRlbXBsZXxlbnwxfHx8fDE3NjM4NjExNjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
@@ -45,7 +44,10 @@ export function DestinationDetail() {
       gallery: [
         "https://images.unsplash.com/photo-1665730012856-7acf680ad1ed?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaHV0YW4lMjBtb25hc3Rlcnl8ZW58MXx8fHwxNzYzODY3NTQwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
         "https://images.unsplash.com/photo-1629778634400-21720d1b92b3?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaHV0YW4lMjBsYW5kc2NhcGV8ZW58MXx8fHwxNzYzODY3NTQwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
-        "https://images.unsplash.com/photo-1552590635-27c2c2128abf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFkaXRpb25hbCUyMGZvb2R8ZW58MXx8fHwxNzYzODY3NTQwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
+        "https://images.unsplash.com/photo-1552590635-27c2c2128abf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHx0cmFkaXRpb25hbCUyMGZvb2R8ZW58MXx8fHwxNzYzODY3NTQwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "https://images.unsplash.com/photo-1729179380398-5a13975402f7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaHV0YW4lMjB0ZW1wbGUlMjBhcmNoaXRlY3R1cmV8ZW58MXx8fHwxNzYzOTU5MzgwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "https://images.unsplash.com/photo-1761048168516-337c853bcf11?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaHV0YW4lMjBmZXN0aXZhbCUyMGN1bHR1cmV8ZW58MXx8fHwxNzYzOTU5MzgwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
+        "https://images.unsplash.com/photo-1646486174281-8e08a2f9329c?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxiaHV0YW4lMjBtb3VudGFpbnMlMjB2YWxsZXl8ZW58MXx8fHwxNzYzOTU5MzgwfDA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral"
       ],
       tips: [
         "부탄은 일일 관광료가 책정되어 있어 비용이 높은 편입니다",
@@ -58,7 +60,72 @@ export function DestinationDetail() {
     // 더 많은 여행지 데이터를 추가할 수 있습니다
   };
 
+export function DestinationDetail() {
+  const navigate = useNavigate();
+  const { destinationId } = useParams();
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+
+
   const destination = destinationData[destinationId || ""] || destinationData["부탄"];
+
+  const [galleryImages, setGalleryImages] = useState<string[]>([]);
+  const [page, setPage] = useState(1); 
+
+  useEffect(() => {
+    if (destination?.name) {
+      setGalleryImages(destination.gallery || []);
+      fetchGallery(1);
+    }
+  }, [destination]);
+
+  if (!destination) {
+    return (
+      <div className="min-h-screen flex items-center justify-center bg-gray-50">
+        <div className="text-center">
+          <h2 className="text-2xl font-bold text-gray-800 mb-4">정보를 찾을 수 없습니다</h2>
+          <p className="text-gray-600 mb-6">요청하신 여행지({destinationId})의 상세 정보가 아직 등록되지 않았습니다.</p>
+          <button
+            onClick={() => navigate("/")}
+            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
+          >
+            홈으로 돌아가기
+          </button>
+        </div>
+      </div>
+    );
+  }
+
+ const fetchGallery = (pageNum: number) => {
+    if (!destination) return;
+    const queryKeyword = destination.englishname || destination.name;
+    fetch(`http://localhost:5000/api/gallery?keyword=${queryKeyword}&page=${pageNum}`)
+      .then(res => res.json())
+      .then(newPhotos => {
+        if (Array.isArray(newPhotos) && newPhotos.length > 0) {
+          setGalleryImages(prev => {
+            const uniquePhotos = newPhotos.filter((photo: string) => !prev.includes(photo));
+            return [...prev, ...uniquePhotos];
+          });
+        }
+      })
+      .catch(err => console.error("Gallary loading fail:", err));
+  };
+
+ const scrollGalleryLeft = () => {
+    if (galleryScrollRef.current) {
+      galleryScrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
+
+const scrollGalleryRight = () => {
+    if (galleryScrollRef.current) {
+      galleryScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+    if (galleryImages.length >= 9) return;
+    const nextPage = page + 1;
+    setPage(nextPage);
+    fetchGallery(nextPage);
+  };
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
@@ -147,19 +214,39 @@ export function DestinationDetail() {
           </div>
         </div>
 
-        {/* Gallery */}
+        {/* GalleryImage */}
         <div className="mb-12">
-          <h2 className="text-gray-900 mb-6">갤러리</h2>
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-            {destination.gallery.map((image, index) => (
-              <div key={index} className="rounded-xl overflow-hidden shadow-md aspect-square">
-                <img 
-                  src={image} 
-                  alt={`${destination.name} ${index + 1}`}
-                  className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
-                />
-              </div>
-            ))}
+          <h2 className="text-gray-900 mb-6 text-2xl font-bold">📸 갤러리</h2>
+          <div className="relative">
+            <button
+              onClick={scrollGalleryLeft}
+              className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors -ml-5"
+              aria-label="Previous"
+            >
+              <ChevronLeft className="w-6 h-6 text-gray-700" />
+            </button>
+            <button
+              onClick={scrollGalleryRight}
+              className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors -mr-5"
+              aria-label="Next"
+            >
+              <ChevronRight className="w-6 h-6 text-gray-700" />
+            </button>
+            <div 
+              ref={galleryScrollRef}
+              className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
+              style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+            >
+              {galleryImages.map((image, index) => (
+                <div key={index} className="rounded-xl overflow-hidden shadow-md flex-shrink-0 w-[calc(33.333%-16px)] aspect-square snap-start">
+                  <img 
+                    src={image} 
+                    alt={`Gallery ${index + 1}`}
+                    className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
+                  />
+                </div>
+              ))}
+            </div>
           </div>
         </div>
 

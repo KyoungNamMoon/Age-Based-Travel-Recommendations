@@ -381,7 +381,7 @@ export function Home() {
 
   const currentGroup = ageGroups.find(group => group.id === selectedAge);
   const displayedDestinations = showMore ? currentGroup?.destinations : currentGroup?.destinations.slice(0, 3);
- const scrollLeft = () => {
+  const scrollLeft = () => {
     if (scrollContainerRef.current) {
       scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
     }
@@ -490,8 +490,6 @@ export function Home() {
       <section className="bg-gray-50 py-8">
         <MonthlyDestinations />
       </section>
-
-        
       {/* Unique Destinations Section */}
       <section className="bg-white py-8">
         <UniqueDestinations />
