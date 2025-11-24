@@ -1,6 +1,8 @@
-import { useState } from "react";
+import { useState, useRef } from "react";
 import { DestinationCard } from "./DestinationCard";
-import { Users, Baby, Sparkles, Heart, Briefcase, Home as HomeIcon } from "lucide-react";
+import { Users, Baby, Sparkles, Heart, Briefcase, Home as HomeIcon, ChevronLeft, ChevronRight } from "lucide-react";
+import { UniqueDestinations } from "./UniqueDestinations";
+import { MonthlyDestinations } from "./MonthlyDestinations";
 
 interface Destination {
   name: string;
@@ -374,11 +376,22 @@ export function Home() {
   ];
 
   const [selectedAge, setSelectedAge] = useState<string>("twenties");
+  const scrollContainerRef = useRef<HTMLDivElement>(null);
   const [showMore, setShowMore] = useState<boolean>(false);
 
   const currentGroup = ageGroups.find(group => group.id === selectedAge);
   const displayedDestinations = showMore ? currentGroup?.destinations : currentGroup?.destinations.slice(0, 3);
+ const scrollLeft = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: -400, behavior: 'smooth' });
+    }
+  };
 
+  const scrollRight = () => {
+    if (scrollContainerRef.current) {
+      scrollContainerRef.current.scrollBy({ left: 400, behavior: 'smooth' });
+    }
+  };
   return (
     <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       {/* Header */}
@@ -436,26 +449,53 @@ export function Home() {
               </p>
             </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
-              {displayedDestinations?.map((destination, index) => (
-                <DestinationCard key={index} {...destination} />
-              ))}
-            </div>
+           {/* 캐러셀 컨테이너 */}
+              <div className="relative">
+                {/* 왼쪽 화살표 버튼 */}
+                <button
+                  onClick={scrollLeft}
+                  className="absolute left-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors -ml-5"
+                  aria-label="이전"
+                >
+                  <ChevronLeft className="w-6 h-6 text-gray-700" />
+                </button>
 
-            {/* More Button */}
-            <div className="flex items-center justify-center gap-4 py-8">
-              <div className="flex-1 h-px bg-gradient-to-r from-transparent via-gray-300 to-gray-300"></div>
-              <button
-                onClick={() => setShowMore(!showMore)}
-                className="px-8 py-3 text-gray-700 hover:text-blue-600 transition-colors duration-200 whitespace-nowrap"
-              >
-                {showMore ? "간단히 보기" : "더보기"}
-              </button>
-              <div className="flex-1 h-px bg-gradient-to-l from-transparent via-gray-300 to-gray-300"></div>
+                {/* 스크롤 컨테이너 */}
+                <div 
+                  ref={scrollContainerRef}
+                  className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth"
+                  style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
+                >
+                  {currentGroup.destinations.map((destination, index) => (
+                    <div key={index} className="flex-shrink-0 w-[350px]">
+                      <DestinationCard {...destination} />
+                    </div>
+                  ))}
+                </div>
+
+                {/* 오른쪽 화살표 버튼 */}
+                <button
+                  onClick={scrollRight}
+                  className="absolute right-0 top-1/2 -translate-y-1/2 z-10 w-10 h-10 bg-white rounded-full shadow-lg flex items-center justify-center hover:bg-gray-100 transition-colors -mr-5"
+                  aria-label="다음"
+                >
+                  <ChevronRight className="w-6 h-6 text-gray-700" />
+                </button>
+              </div>
             </div>
-          </div>
         )}
       </main>
+
+      {/* Monthly Destinations Section */}
+      <section className="bg-gray-50 py-8">
+        <MonthlyDestinations />
+      </section>
+
+        
+      {/* Unique Destinations Section */}
+      <section className="bg-white py-8">
+        <UniqueDestinations />
+      </section>
 
       {/* Footer */}
       <footer className="bg-white border-t border-gray-200 mt-20">
