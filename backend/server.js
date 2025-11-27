@@ -63,6 +63,22 @@ const FIXED_RECOMMENDATIONS = {
     {"name":"Tuscany","country":"Italy","description":"Rolling hills, wine, and artistic heritage.","tags":["Wine","Relaxation"]},
     {"name":"Egypt","country":"Egypt","description":"Journey back in time with a Nile cruise.","tags":["History","Culture"]},
     {"name":"Alaska Cruise","country":"USA","description":"Experience majestic wilderness comfortably.","tags":["Cruise","Nature"]}
+  ],
+  "monthly": [
+    {"name":"Lapland","country":"Finland","description":"Experience the magic of winter in Santa's hometown","tags":["Winter", "Family", "Northern Lights"]},
+    {"name":"Tromsø","country":"Norway","description":"Witness the spectacular aurora borealis dance","tags":["Aurora", "Nature", "Adventure"]},
+    {"name":"Zermatt","country":"Switzerland","description":"World-class skiing and breathtaking mountain views","tags":["Skiing", "Mountain", "Luxury"]},
+    {"name":"Nuremberg","country":"Germany","description":"Traditional markets filled with festive cheer","tags":["Culture", "Food", "Shopping"]},
+    {"name":"Blue Lagoon","country":"Iceland","description":"Relax in geothermal pools under the stars","tags":["Relaxation", "Hot Springs", "Wellness"]},
+    {"name":"Banff","country":"Canada","description":"Wildlife viewing in pristine winter landscapes","tags":["Wildlife", "Safari", "Nature"]}
+  ],
+  "unique": [
+    {"name":"Telluride","country":"USA","description":"Secluded retreat with stunning mountain views","tags":["Mountain", "Cabin", "Cozy"]},
+    {"name":"Gatlinburg","country":"USA","description":"Modern villa with private infinity pool","tags":["Luxury", "Pool", "Modern"]},
+    {"name":"Shenandoah","country":"USA","description":"Romantic getaway with outdoor hot tub","tags":["Romance", "Hot Tub", "Private"]},
+    {"name":"Smoky Mountains","country":"USA","description":"Traditional log cabin in scenic woodland","tags":["Traditional", "Woodland", "Family"]},
+    {"name":"Portland","country":"USA","description":"Unique treehouse experience in the forest","tags":["Treehouse", "Nature", "Unique"]},
+    {"name":"Selfoss","country":"Iceland","description":"Sleep under the stars in a glass igloo","tags":["Unique", "Aurora", "Luxury"]}
   ]
 };
 
@@ -75,15 +91,21 @@ app.get('/api/recommendations', async (req, res) => {
       const stats = fs.statSync(CACHE_FILE_PATH);
       const now = new Date().getTime();
       if (now - new Date(stats.mtime).getTime() < CACHE_DURATION) {
-        console.log("📦 Using cache");
+        console.log("Using cache");
         const fileData = fs.readFileSync(CACHE_FILE_PATH, 'utf-8');
         return res.json(JSON.parse(fileData));
       }
     }
 
-    console.log("🤖 Asking Gemini...");
+    console.log("Asking Gemini...");
+    const currentMonth = new Date().toLocaleString('default', { month: 'long' });
+    const currentYear = new Date().toLocaleString('default', { year: 'numeric' });
     const prompt = `
-      Recommend 6 travel destinations for each age group: teens, twenties, thirties, forties, fifties.
+      Recommend 6 travel destinations for each category:
+      1. Age groups: teens, twenties, thirties, forties, fifties
+      2. Monthly: "monthly" (Destinations best for visiting in ${currentMonth})
+      3. Unique: "unique" (Extraordinary, off-beat, or unique accommodation styles) in ${currentYear}
+
       Return ONLY a valid JSON object (no markdown).
       
       Each destination MUST have:
@@ -98,7 +120,9 @@ app.get('/api/recommendations', async (req, res) => {
         "twenties": [ ... ],
         "thirties": [ ... ],
         "forties": [ ... ],
-        "fifties": [ ... ]
+        "fifties": [ ... ],
+        "monthly": [ ... ],
+        "unique": [ ... ]
       }
     `;
     

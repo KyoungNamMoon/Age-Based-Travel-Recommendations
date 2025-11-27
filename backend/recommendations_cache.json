@@ -3,7 +3,7 @@
     {
       "name": "Orlando",
       "country": "USA",
-      "description": "Home to world-famous theme parks, Orlando offers thrilling rides, magical experiences, and endless fun.",
+      "description": "Home to world-famous theme parks, thrilling rides, and magical experiences for unforgettable family fun.",
       "tags": [
         "Theme Parks",
         "Adventure",
@@ -11,53 +11,53 @@
       ]
     },
     {
-      "name": "Costa Rica",
-      "country": "Costa Rica",
-      "description": "Explore lush rainforests, volcanic landscapes, and beautiful beaches. Perfect for adventure seekers.",
-      "tags": [
-        "Adventure",
-        "Nature",
-        "Wildlife"
-      ]
-    },
-    {
-      "name": "London",
-      "country": "UK",
-      "description": "Discover iconic landmarks, museums, and vibrant city life. A blend of history and modern fun.",
-      "tags": [
-        "Culture",
-        "History",
-        "City"
-      ]
-    },
-    {
       "name": "Tokyo",
       "country": "Japan",
-      "description": "Experience futuristic tech, unique pop culture, and ancient traditions in a bustling metropolis.",
+      "description": "Vibrant metropolis blending futuristic technology, ancient traditions, and pop culture. Safe and exciting.",
       "tags": [
         "Culture",
         "Tech",
-        "Unique"
-      ]
-    },
-    {
-      "name": "Cancun",
-      "country": "Mexico",
-      "description": "Enjoy stunning white-sand beaches, clear waters, and exciting water sports. Great for groups.",
-      "tags": [
-        "Beach",
-        "Water Sports",
-        "Resort"
+        "Safe"
       ]
     },
     {
       "name": "Barcelona",
       "country": "Spain",
-      "description": "A vibrant city with stunning architecture, delicious food, and beautiful urban beaches.",
+      "description": "Lively city with stunning architecture, beautiful beaches, and delicious tapas. Great for exploring.",
       "tags": [
-        "City",
         "Beach",
-        "Culture"
+        "Architecture",
+        "Food"
+      ]
+    },
+    {
+      "name": "London",
+      "country": "UK",
+      "description": "Iconic landmarks, world-class museums, West End shows, and diverse neighborhoods to explore.",
+      "tags": [
+        "History",
+        "Culture",
+        "Museums"
+      ]
+    },
+    {
+      "name": "Amsterdam",
+      "country": "Netherlands",
+      "description": "Picturesque canals, historic architecture, and famous museums. Explore by bike for unique views.",
+      "tags": [
+        "Canals",
+        "Museums",
+        "Cycling"
+      ]
+    },
+    {
+      "name": "San Diego",
+      "country": "USA",
+      "description": "Sunny beaches, famous zoo, Legoland, and a relaxed vibe make it ideal for youthful fun.",
+      "tags": [
+        "Beaches",
+        "Zoo",
+        "Relaxed"
       ]
     }
   ],
@@ -65,79 +65,109 @@
     {
       "name": "Bangkok",
       "country": "Thailand",
-      "description": "A bustling city offering vibrant street life, ancient temples, incredible food, and lively nightlife.",
+      "description": "Buzzing city of temples, street food, vibrant nightlife, and endless markets. Adventure awaits!",
       "tags": [
-        "Culture",
         "Nightlife",
-        "Budget"
-      ]
-    },
-    {
-      "name": "Berlin",
-      "country": "Germany",
-      "description": "Rich in history, art, and an unparalleled nightlife scene. Explore museums and vibrant districts.",
-      "tags": [
-        "History",
-        "Nightlife",
-        "Art"
-      ]
-    },
-    {
-      "name": "Amsterdam",
-      "country": "Netherlands",
-      "description": "Charming canals, world-class museums, and a unique, liberal atmosphere. Perfect for exploring.",
-      "tags": [
-        "Culture",
-        "Canals",
-        "Vibrant"
-      ]
-    },
-    {
-      "name": "Lisbon",
-      "country": "Portugal",
-      "description": "Hilly, coastal capital known for Fado music, historic neighborhoods, and lively nightlife.",
-      "tags": [
-        "City",
-        "Food",
-        "Nightlife"
-      ]
-    },
-    {
-      "name": "Ibiza",
-      "country": "Spain",
-      "description": "Famous for its vibrant nightlife, beautiful beaches, and stunning Mediterranean sunsets.",
-      "tags": [
-        "Party",
-        "Beach",
-        "Music"
-      ]
-    },
-    {
-      "name": "Sydney",
-      "country": "Australia",
-      "description": "Iconic opera house, beautiful harbor, stunning beaches, and a vibrant urban energy.",
-      "tags": [
-        "City",
-        "Beach",
-        "Adventure"
-      ]
-    }
-  ],
-  "thirties": [
-    {
-      "name": "Rome",
-      "country": "Italy",
-      "description": "Immerse yourself in ancient history, exquisite art, and world-renowned Italian cuisine.",
-      "tags": [
-        "History",
         "Food",
         "Culture"
       ]
     },
     {
+      "name": "Lisbon",
+      "country": "Portugal",
+      "description": "Historic charm meets vibrant nightlife. Explore hilly streets, Fado music, and stunning viewpoints.",
+      "tags": [
+        "Cityscape",
+        "Nightlife",
+        "Food"
+      ]
+    },
+    {
+      "name": "Berlin",
+      "country": "Germany",
+      "description": "A city steeped in history with an unparalleled art scene, techno clubs, and diverse culture.",
+      "tags": [
+        "History",
+        "Art",
+        "Nightlife"
+      ]
+    },
+    {
+      "name": "Medellín",
+      "country": "Colombia",
+      "description": "The 'City of Eternal Spring' offers lively nightlife, stunning mountain views, and a thriving art scene.",
+      "tags": [
+        "Nightlife",
+        "Mountains",
+        "Culture"
+      ]
+    },
+    {
+      "name": "Hanoi",
+      "country": "Vietnam",
+      "description": "Ancient capital with rich history, delicious street food, bustling Old Quarter, and serene lakes.",
+      "tags": [
+        "Food",
+        "History",
+        "Budget"
+      ]
+    },
+    {
+      "name": "Mexico City",
+      "country": "Mexico",
+      "description": "A dynamic metropolis with ancient ruins, world-class museums, delicious cuisine, and vibrant markets.",
+      "tags": [
+        "Culture",
+        "Food",
+        "History"
+      ]
+    }
+  ],
+  "thirties": [
+    {
+      "name": "Kyoto",
+      "country": "Japan",
+      "description": "Ancient capital renowned for its temples, serene gardens, geishas, and exquisite traditional dining.",
+      "tags": [
+        "Culture",
+        "Tradition",
+        "Food"
+      ]
+    },
+    {
+      "name": "Rome",
+      "country": "Italy",
+      "description": "Walk through history, marvel at ancient ruins, iconic art, and indulge in world-class Italian cuisine.",
+      "tags": [
+        "History",
+        "Food",
+        "Art"
+      ]
+    },
+    {
+      "name": "Reykjavik",
+      "country": "Iceland",
+      "description": "Gateway to stunning natural wonders: geysers, hot springs, northern lights, and unique landscapes.",
+      "tags": [
+        "Nature",
+        "Adventure",
+        "Relaxation"
+      ]
+    },
+    {
+      "name": "Cape Town",
+      "country": "South Africa",
+      "description": "Iconic Table Mountain, pristine beaches, vibrant culture, and world-class wine regions nearby.",
+      "tags": [
+        "Scenery",
+        "Adventure",
+        "Wine"
+      ]
+    },
+    {
       "name": "Paris",
       "country": "France",
-      "description": "The City of Love offers iconic landmarks, fine dining, and unparalleled romantic ambiance.",
+      "description": "The City of Love, famous for its romantic ambiance, iconic landmarks, fine dining, and art.",
       "tags": [
         "Romance",
         "Culture",
@@ -147,131 +177,19 @@
     {
       "name": "Maui",
       "country": "USA",
-      "description": "Lush landscapes, stunning beaches, and volcanic adventures. Ideal for relaxation and exploration.",
+      "description": "Tropical paradise with stunning beaches, volcanic landscapes, and opportunities for relaxation or adventure.",
       "tags": [
-        "Nature",
         "Beach",
-        "Relaxation"
-      ]
-    },
-    {
-      "name": "Kyoto",
-      "country": "Japan",
-      "description": "Ancient temples, serene gardens, and traditional culture provide a tranquil and enriching experience.",
-      "tags": [
-        "Culture",
-        "History",
-        "Tranquil"
-      ]
-    },
-    {
-      "name": "Queenstown",
-      "country": "New Zealand",
-      "description": "Adventure capital amidst breathtaking scenery. Bungee jumping, hiking, and stunning views.",
-      "tags": [
-        "Adventure",
-        "Nature",
-        "Scenic"
-      ]
-    },
-    {
-      "name": "Santorini",
-      "country": "Greece",
-      "description": "Iconic white-washed villages, stunning sunsets, and volcanic beaches. Perfect for romance.",
-      "tags": [
-        "Romance",
-        "Views",
-        "Relaxation"
+        "Relaxation",
+        "Nature"
       ]
     }
   ],
   "forties": [
     {
-      "name": "Tuscany",
-      "country": "Italy",
-      "description": "Rolling hills, vineyards, and delicious regional cuisine. Perfect for culinary and cultural immersion.",
-      "tags": [
-        "Wine",
-        "Food",
-        "Culture"
-      ]
-    },
-    {
-      "name": "Alaska Cruise",
-      "country": "USA",
-      "description": "Explore majestic glaciers, abundant wildlife, and stunning natural beauty in luxurious comfort.",
-      "tags": [
-        "Cruise",
-        "Nature",
-        "Wildlife"
-      ]
-    },
-    {
-      "name": "Cape Town",
-      "country": "South Africa",
-      "description": "Stunning natural beauty, vibrant culture, and gateway to incredible wildlife safaris.",
-      "tags": [
-        "Nature",
-        "Culture",
-        "Safari"
-      ]
-    },
-    {
-      "name": "Machu Picchu",
-      "country": "Peru",
-      "description": "Discover ancient Inca history and breathtaking mountain vistas. A truly spiritual journey.",
-      "tags": [
-        "History",
-        "Culture",
-        "Scenic"
-      ]
-    },
-    {
-      "name": "Dublin",
-      "country": "Ireland",
-      "description": "Historic pubs, rich literary heritage, and friendly locals. Experience true Irish charm.",
-      "tags": [
-        "Culture",
-        "History",
-        "Pubs"
-      ]
-    },
-    {
-      "name": "Patagonia",
-      "country": "Argentina/Chile",
-      "description": "Experience dramatic landscapes, glaciers, and stunning national parks. An unforgettable natural wonder.",
-      "tags": [
-        "Nature",
-        "Hiking",
-        "Scenic"
-      ]
-    }
-  ],
-  "fifties": [
-    {
-      "name": "Danube River Cruise",
-      "country": "Europe",
-      "description": "Leisurely explore historic cities and picturesque landscapes along the famous Danube.",
-      "tags": [
-        "Cruise",
-        "Culture",
-        "Relaxation"
-      ]
-    },
-    {
-      "name": "Bora Bora",
-      "country": "French Polynesia",
-      "description": "Overwater bungalows, crystal-clear lagoons, and ultimate luxury for unparalleled relaxation.",
-      "tags": [
-        "Luxury",
-        "Beach",
-        "Relaxation"
-      ]
-    },
-    {
       "name": "Florence",
       "country": "Italy",
-      "description": "Immerse in Renaissance art, architecture, and exquisite Tuscan cuisine. A cultural gem.",
+      "description": "Renaissance art and architecture, charming streets, delectable Tuscan cuisine, and fine wines.",
       "tags": [
         "Art",
         "History",
@@ -279,33 +197,239 @@
       ]
     },
     {
-      "name": "Cairo",
-      "country": "Egypt",
-      "description": "Explore ancient wonders like the Pyramids and Sphinx, and cruise the historic Nile River.",
+      "name": "Bordeaux",
+      "country": "France",
+      "description": "World capital of wine, offering vineyard tours, gourmet dining, and elegant city exploration.",
       "tags": [
-        "History",
-        "Culture",
-        "Ancient"
+        "Wine",
+        "Gourmet",
+        "Culture"
       ]
     },
     {
-      "name": "Sedona",
-      "country": "USA",
-      "description": "Stunning red rock formations, spiritual vortexes, and outdoor activities for rejuvenation.",
+      "name": "Queenstown",
+      "country": "New Zealand",
+      "description": "Adventure capital amidst stunning landscapes, offering luxury stays, fine dining, and outdoor activities.",
       "tags": [
-        "Nature",
-        "Spiritual",
+        "Adventure",
+        "Scenery",
+        "Luxury"
+      ]
+    },
+    {
+      "name": "Napa Valley",
+      "country": "USA",
+      "description": "Premier wine region, perfect for vineyard tours, gourmet dining, and luxurious relaxation.",
+      "tags": [
+        "Wine",
+        "Luxury",
+        "Food"
+      ]
+    },
+    {
+      "name": "Amalfi Coast",
+      "country": "Italy",
+      "description": "Dramatic coastline, picturesque towns, exquisite seafood, and stunning panoramic views.",
+      "tags": [
+        "Scenery",
+        "Luxury",
+        "Food"
+      ]
+    },
+    {
+      "name": "Ubud",
+      "country": "Indonesia",
+      "description": "Bali's cultural heart, offering serene rice paddies, spiritual retreats, and vibrant artisan markets.",
+      "tags": [
+        "Wellness",
+        "Culture",
+        "Nature"
+      ]
+    }
+  ],
+  "fifties": [
+    {
+      "name": "Santorini",
+      "country": "Greece",
+      "description": "Iconic white-washed villages, stunning sunsets, caldera views, and exquisite Greek cuisine.",
+      "tags": [
+        "Romance",
+        "Scenery",
         "Relaxation"
       ]
     },
     {
-      "name": "Vancouver",
+      "name": "Vancouver Island",
       "country": "Canada",
-      "description": "Coastal city offering stunning mountain views, urban culture, and outdoor adventures.",
+      "description": "Rugged coastline, ancient forests, charming towns, and gourmet food experiences. Serene and beautiful.",
       "tags": [
-        "City",
         "Nature",
-        "Scenic"
+        "Scenic",
+        "Gourmet"
+      ]
+    },
+    {
+      "name": "Buenos Aires",
+      "country": "Argentina",
+      "description": "'Paris of South America,' famous for tango, vibrant culture, European architecture, and delicious steaks.",
+      "tags": [
+        "Culture",
+        "Tango",
+        "Food"
+      ]
+    },
+    {
+      "name": "Dubrovnik",
+      "country": "Croatia",
+      "description": "Historic walled city, stunning Adriatic Sea views, and rich cultural heritage. Perfect for exploration.",
+      "tags": [
+        "History",
+        "Coastal",
+        "Culture"
+      ]
+    },
+    {
+      "name": "Edinburgh",
+      "country": "Scotland",
+      "description": "Historic castle, cobbled streets, vibrant arts scene, and rich Scottish heritage. Explore at leisure.",
+      "tags": [
+        "History",
+        "Culture",
+        "Castle"
+      ]
+    },
+    {
+      "name": "Siem Reap",
+      "country": "Cambodia",
+      "description": "Gateway to Angkor Wat, offering ancient temple complexes, rich history, and spiritual experiences.",
+      "tags": [
+        "History",
+        "Temples",
+        "Culture"
+      ]
+    }
+  ],
+  "monthly": [
+    {
+      "name": "Kyoto",
+      "country": "Japan",
+      "description": "Experience vibrant autumn foliage, mild weather, and traditional Japanese culture in its ancient capital.",
+      "tags": [
+        "Autumn",
+        "Culture",
+        "Scenery"
+      ]
+    },
+    {
+      "name": "Marrakech",
+      "country": "Morocco",
+      "description": "Enjoy comfortable, mild weather for exploring bustling souks, palaces, and vibrant Djemaa el-Fna square.",
+      "tags": [
+        "Culture",
+        "Markets",
+        "Warm"
+      ]
+    },
+    {
+      "name": "Dubai",
+      "country": "UAE",
+      "description": "Ideal weather for exploring futuristic architecture, luxury shopping, and desert adventures.",
+      "tags": [
+        "Luxury",
+        "Modern",
+        "Warm"
+      ]
+    },
+    {
+      "name": "Sydney",
+      "country": "Australia",
+      "description": "Spring brings pleasant temperatures, sunny beaches, and vibrant city life. Perfect for outdoor activities.",
+      "tags": [
+        "Beach",
+        "Spring",
+        "City"
+      ]
+    },
+    {
+      "name": "El Calafate",
+      "country": "Argentina",
+      "description": "Gateway to Patagonia, offering stunning glaciers and trekking as the warm season begins.",
+      "tags": [
+        "Glaciers",
+        "Adventure",
+        "Nature"
+      ]
+    },
+    {
+      "name": "New Orleans",
+      "country": "USA",
+      "description": "Enjoy mild weather perfect for jazz, Creole cuisine, and exploring the historic French Quarter before peak season.",
+      "tags": [
+        "Music",
+        "Food",
+        "History"
+      ]
+    }
+  ],
+  "unique": [
+    {
+      "name": "Jukkasjärvi",
+      "country": "Sweden",
+      "description": "Stay at the world-famous ICEHOTEL, carved entirely from snow and ice, offering a truly unique arctic experience.",
+      "tags": [
+        "Ice Hotel",
+        "Arctic",
+        "Unique"
+      ]
+    },
+    {
+      "name": "Kaikoura",
+      "country": "New Zealand",
+      "description": "Sleep in a luxury treehouse at Hapuku Lodge, nestled in native forests with stunning ocean and mountain views.",
+      "tags": [
+        "Treehouse",
+        "Luxury",
+        "Nature"
+      ]
+    },
+    {
+      "name": "Goreme",
+      "country": "Turkey",
+      "description": "Experience a stay in a historic cave hotel, carved into ancient rock formations of Cappadocia.",
+      "tags": [
+        "Cave Hotel",
+        "History",
+        "Unique"
+      ]
+    },
+    {
+      "name": "Pemba Island",
+      "country": "Tanzania",
+      "description": "Dive into luxury at The Manta Resort's Underwater Room, sleeping surrounded by marine life.",
+      "tags": [
+        "Underwater",
+        "Luxury",
+        "Marine Life"
+      ]
+    },
+    {
+      "name": "Baja California",
+      "country": "Mexico",
+      "description": "Stargaze from a transparent bubble dome at Campera Hotel Burbuja, amidst vineyards.",
+      "tags": [
+        "Bubble Dome",
+        "Stargazing",
+        "Vineyards"
+      ]
+    },
+    {
+      "name": "Uluru",
+      "country": "Australia",
+      "description": "Luxury glamping at Longitude 131°, with private tents overlooking the iconic Uluru in the Outback.",
+      "tags": [
+        "Glamping",
+        "Desert",
+        "Luxury"
       ]
     }
   ]

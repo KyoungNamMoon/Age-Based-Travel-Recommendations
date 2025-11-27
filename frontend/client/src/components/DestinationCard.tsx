@@ -6,7 +6,6 @@ interface DestinationCardProps {
   country: string;
   description: string;
   imageUrl: string;
-  rating: number;
   tags: string[];
 }
 
@@ -15,7 +14,6 @@ export function DestinationCard({
   country, 
   description, 
   imageUrl, 
-  rating,
   tags 
 }: DestinationCardProps) {
   const navigate = useNavigate();
@@ -35,10 +33,6 @@ export function DestinationCard({
           alt={name}
           className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
         />
-        <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full flex items-center gap-1">
-          <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-          <span className="text-sm">{rating}</span>
-        </div>
       </div>
       
       <div className="p-5">

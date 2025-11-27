@@ -1,11 +1,10 @@
 import { useNavigate, useParams } from "react-router-dom";
 import { ArrowLeft, MapPin, Calendar, DollarSign, Clock, Star, Users, Plane, ChevronLeft, ChevronRight } from "lucide-react";
-import { useRef, useState, useEffect} from "react";
+import { useRef, useEffect } from "react";
 
 interface DetailData {
   [key: string]: {
     name: string;
-    englishname: string;
     country: string;
     description: string;
     imageUrl: string;
@@ -21,10 +20,19 @@ interface DetailData {
   };
 }
 
-const destinationData: DetailData = {
+export function DestinationDetail() {
+  const navigate = useNavigate();
+  const { destinationId } = useParams();
+  const galleryScrollRef = useRef<HTMLDivElement>(null);
+
+  // Scroll to top when component mounts
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+
+  const destinationData: DetailData = {
     "부탄": {
       name: "부탄",
-      englishname: "Bhutan",
       country: "부탄",
       description: "히말라야의 평화로운 불교 왕국",
       imageUrl: "https://images.unsplash.com/photo-1699359104603-14a5607966bf?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&ixid=M3w3Nzg4Nzd8MHwxfHNlYXJjaHwxfHxjdWx0dXJhbCUyMHRlbXBsZXxlbnwxfHx8fDE3NjM4NjExNjh8MA&ixlib=rb-4.1.0&q=80&w=1080&utm_source=figma&utm_medium=referral",
@@ -60,71 +68,18 @@ const destinationData: DetailData = {
     // 더 많은 여행지 데이터를 추가할 수 있습니다
   };
 
-export function DestinationDetail() {
-  const navigate = useNavigate();
-  const { destinationId } = useParams();
-  const galleryScrollRef = useRef<HTMLDivElement>(null);
-
-
   const destination = destinationData[destinationId || ""] || destinationData["부탄"];
 
-  const [galleryImages, setGalleryImages] = useState<string[]>([]);
-  const [page, setPage] = useState(1); 
-
-  useEffect(() => {
-    if (destination?.name) {
-      setGalleryImages(destination.gallery || []);
-      fetchGallery(1);
-    }
-  }, [destination]);
-
-  if (!destination) {
-    return (
-      <div className="min-h-screen flex items-center justify-center bg-gray-50">
-        <div className="text-center">
-          <h2 className="text-2xl font-bold text-gray-800 mb-4">정보를 찾을 수 없습니다</h2>
-          <p className="text-gray-600 mb-6">요청하신 여행지({destinationId})의 상세 정보가 아직 등록되지 않았습니다.</p>
-          <button
-            onClick={() => navigate("/")}
-            className="px-6 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors"
-          >
-            홈으로 돌아가기
-          </button>
-        </div>
-      </div>
-    );
-  }
-
- const fetchGallery = (pageNum: number) => {
-    if (!destination) return;
-    const queryKeyword = destination.englishname || destination.name;
-    fetch(`http://localhost:5000/api/gallery?keyword=${queryKeyword}&page=${pageNum}`)
-      .then(res => res.json())
-      .then(newPhotos => {
-        if (Array.isArray(newPhotos) && newPhotos.length > 0) {
-          setGalleryImages(prev => {
-            const uniquePhotos = newPhotos.filter((photo: string) => !prev.includes(photo));
-            return [...prev, ...uniquePhotos];
-          });
-        }
-      })
-      .catch(err => console.error("Gallary loading fail:", err));
-  };
-
- const scrollGalleryLeft = () => {
+  const scrollGalleryLeft = () => {
     if (galleryScrollRef.current) {
       galleryScrollRef.current.scrollBy({ left: -400, behavior: 'smooth' });
     }
   };
 
-const scrollGalleryRight = () => {
+  const scrollGalleryRight = () => {
     if (galleryScrollRef.current) {
       galleryScrollRef.current.scrollBy({ left: 400, behavior: 'smooth' });
     }
-    if (galleryImages.length >= 9) return;
-    const nextPage = page + 1;
-    setPage(nextPage);
-    fetchGallery(nextPage);
   };
 
   return (
@@ -214,9 +169,9 @@ const scrollGalleryRight = () => {
           </div>
         </div>
 
-        {/* GalleryImage */}
+        {/* Gallery */}
         <div className="mb-12">
-          <h2 className="text-gray-900 mb-6 text-2xl font-bold">📸 갤러리</h2>
+          <h2 className="text-gray-900 mb-6">갤러리</h2>
           <div className="relative">
             <button
               onClick={scrollGalleryLeft}
@@ -237,11 +192,11 @@ const scrollGalleryRight = () => {
               className="flex gap-6 overflow-x-auto scrollbar-hide scroll-smooth snap-x snap-mandatory"
               style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
             >
-              {galleryImages.map((image, index) => (
+              {destination.gallery.map((image, index) => (
                 <div key={index} className="rounded-xl overflow-hidden shadow-md flex-shrink-0 w-[calc(33.333%-16px)] aspect-square snap-start">
                   <img 
                     src={image} 
-                    alt={`Gallery ${index + 1}`}
+                    alt={`${destination.name} ${index + 1}`}
                     className="w-full h-full object-cover hover:scale-110 transition-transform duration-300"
                   />
                 </div>

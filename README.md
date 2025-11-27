@@ -128,4 +128,3 @@ The frontend client application will run on `http://localhost:3000`.
 
 **Kyoungnam Moon**
 * Major in Computer Science at Virginia Tech
-* GitHub: [Your GitHub Profile URL]

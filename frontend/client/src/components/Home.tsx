@@ -3,9 +3,13 @@ import { DestinationCard } from "./DestinationCard";
 import { Users, Baby, Sparkles, Heart, Briefcase, Home as HomeIcon, ChevronLeft, ChevronRight, Loader2 } from "lucide-react";
 import { UniqueDestinations } from "./UniqueDestinations";
 import { MonthlyDestinations } from "./MonthlyDestinations";
+import { RecentSearches } from './RecentSearches';
+import { HeroSection } from './HeroSection';
+
+
 
 // --- Type Definitions ---
-interface ApiDestination {
+export interface ApiDestination {
   name: string;
   country: string;
   description: string;
@@ -30,8 +34,11 @@ interface AgeGroupConfig {
   bgColor: string;
 }
 
+
+
 // --- Main Component ---
 export function Home() {
+  
   const [recommendations, setRecommendations] = useState<RecommendationsResponse | null>(null);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null); // Error state defined
@@ -91,7 +98,16 @@ export function Home() {
   const scrollRight = () => scrollContainerRef.current?.scrollBy({ left: 400, behavior: 'smooth' });
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
+    <>
+      {/* Hero Section with Search */}
+      <HeroSection />
+
+      {/* Recent Searches Section */}
+      <section className="bg-white py-8">
+        <RecentSearches />
+      </section>
+
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
       <header className="bg-white/80 backdrop-blur-sm border-b border-gray-200 sticky top-0 z-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
           <div className="text-center">
@@ -190,8 +206,14 @@ export function Home() {
         </div>
       </main>
 
-      <section className="bg-gray-50 py-8"><MonthlyDestinations /></section>
-      <section className="bg-white py-8"><UniqueDestinations /></section>
+      <section className="bg-gray-50 py-8">
+        <MonthlyDestinations destinations={recommendations?.monthly || []} />
+      </section>
+      <section className="bg-white py-8">
+        <UniqueDestinations destinations={recommendations?.unique || []} />
+        </section>
+
+        
 
       <footer className="bg-white border-t border-gray-200 mt-20">
         <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8">
@@ -199,6 +221,7 @@ export function Home() {
         </div>
       </footer>
     </div>
+    </>
   );
 }
 
@@ -225,7 +248,6 @@ function SmartDestinationCard({ destination }: { destination: ApiDestination }) 
       country={destination.country}
       description={destination.description}
       imageUrl={imageUrl}
-      rating={4.8}
       tags={destination.tags}
     />
   );
