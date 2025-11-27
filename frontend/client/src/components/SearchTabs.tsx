@@ -1,17 +1,16 @@
 import { useState } from "react";
 import { Search, Plane, MapPin, Minus, Plus, Hotel, Car } from "lucide-react";
 
-type TabType = "hotel" | "flight" | "car" | "package";
+type TabType = "hotel" | "flight" | "car";
 
 export function SearchTabs() {
-  const [activeTab, setActiveTab] = useState<TabType>("package");
+  const [activeTab, setActiveTab] = useState<TabType>("hotel");
   const [travelers, setTravelers] = useState(1);
 
   const tabs = [
     { id: "hotel" as TabType, label: "Hotel", icon: <Hotel className="w-5 h-5" /> },
     { id: "flight" as TabType, label: "Flight", icon: <Plane className="w-5 h-5" /> },
-    { id: "car" as TabType, label: "Car Rental", icon: <Car className="w-5 h-5" /> },
-    { id: "package" as TabType, label: "Flight + Hotel", icon: <><Plane className="w-4 h-4" /><span className="text-xs mx-1">+</span><Hotel className="w-4 h-4" /></> }
+    { id: "car" as TabType, label: "Car Rental", icon: <Car className="w-5 h-5" /> }
   ];
 
   return (
@@ -40,7 +39,7 @@ export function SearchTabs() {
 
       {/* Search Form */}
       <div className="p-8">
-        {(activeTab === "package" || activeTab === "flight") && (
+        {activeTab === "flight" && (
           <>
             <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-4">
               {/* Departure */}
@@ -237,7 +236,6 @@ export function SearchTabs() {
         <button className="w-full bg-blue-600 text-white py-4 rounded-lg hover:bg-blue-700 transition-colors flex items-center justify-center gap-2">
           <Search className="w-5 h-5" />
           <span>
-            {activeTab === "package" && "Search Packages"}
             {activeTab === "flight" && "Search Flights"}
             {activeTab === "hotel" && "Search Hotels"}
             {activeTab === "car" && "Search Car Rentals"}

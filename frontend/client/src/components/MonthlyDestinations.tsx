@@ -1,73 +1,68 @@
-import { Star, ChevronLeft, ChevronRight, Calendar } from "lucide-react";
+import { Star, ChevronLeft, ChevronRight, Calendar, MapPin } from "lucide-react";
 import { useRef } from "react";
+import { useNavigate } from "react-router-dom";
 
 interface MonthlyDestination {
-  title: string;
-  location: string;
-  rating: number;
-  reviewCount: number;
-  price: string;
+  name: string;
+  country: string;
+  description: string;
   imageUrl: string;
-  badge?: string;
+  rating: number;
+  tags: string[];
 }
 
 export function MonthlyDestinations() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
+  const navigate = useNavigate();
 
   const destinations: MonthlyDestination[] = [
     {
-      title: "Lapland Winter Wonderland",
-      location: "Finland",
-      rating: 9.4,
-      reviewCount: 156,
-      price: "$2,499",
+      name: "Lapland Winter Wonderland",
+      country: "Finland",
+      description: "Experience the magic of winter in Santa's hometown",
       imageUrl: "https://images.unsplash.com/photo-1483921020237-2ff51e8e4b22?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "Best for December"
+      rating: 4.7,
+      tags: ["Winter", "Family", "Northern Lights"]
     },
     {
-      title: "Northern Lights Experience",
-      location: "Norway",
-      rating: 9.6,
-      reviewCount: 203,
-      price: "$2,899",
+      name: "Northern Lights Experience",
+      country: "Norway",
+      description: "Witness the spectacular aurora borealis dance",
       imageUrl: "https://images.unsplash.com/photo-1579033461380-adb47c3eb938?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "Limited Time"
+      rating: 4.8,
+      tags: ["Aurora", "Nature", "Adventure"]
     },
     {
-      title: "Swiss Alps Ski Resort",
-      location: "Switzerland",
-      rating: 9.3,
-      reviewCount: 189,
-      price: "$3,299",
+      name: "Swiss Alps Ski Resort",
+      country: "Switzerland",
+      description: "World-class skiing and breathtaking mountain views",
       imageUrl: "https://images.unsplash.com/photo-1551524164-687a55dd1126?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "Trending"
+      rating: 4.7,
+      tags: ["Skiing", "Mountain", "Luxury"]
     },
     {
-      title: "Christmas Markets Tour",
-      location: "Germany",
-      rating: 9.1,
-      reviewCount: 142,
-      price: "$1,899",
+      name: "Christmas Markets Tour",
+      country: "Germany",
+      description: "Traditional markets filled with festive cheer",
       imageUrl: "https://images.unsplash.com/photo-1467269204594-9661b134dd2b?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "Popular"
+      rating: 4.6,
+      tags: ["Culture", "Food", "Shopping"]
     },
     {
-      title: "Hot Springs Retreat",
-      location: "Iceland",
-      rating: 9.5,
-      reviewCount: 178,
-      price: "$2,199",
+      name: "Hot Springs Retreat",
+      country: "Iceland",
+      description: "Relax in geothermal pools under the stars",
       imageUrl: "https://images.unsplash.com/photo-1531366936337-7c912a4589a7?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "Highly Rated"
+      rating: 4.8,
+      tags: ["Relaxation", "Hot Springs", "Wellness"]
     },
     {
-      title: "Winter Safari Adventure",
-      location: "Canada",
-      rating: 9.0,
-      reviewCount: 134,
-      price: "$2,699",
+      name: "Winter Safari Adventure",
+      country: "Canada",
+      description: "Wildlife viewing in pristine winter landscapes",
       imageUrl: "https://images.unsplash.com/photo-1506905925346-21bda4d32df4?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080",
-      badge: "New"
+      rating: 4.5,
+      tags: ["Wildlife", "Safari", "Nature"]
     }
   ];
 
@@ -85,16 +80,14 @@ export function MonthlyDestinations() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-12">
-      <div className="mb-6 flex items-center justify-between">
-        <div>
-          <div className="flex items-center gap-2 mb-2">
-            <Calendar className="w-6 h-6 text-blue-600" />
-            <h3 className="text-gray-900">이달의 여행지</h3>
-          </div>
-          <p className="text-gray-600">
-            Special winter travel packages curated for December 2024
-          </p>
+      <div className="mb-6">
+        <div className="flex items-center gap-2 mb-2">
+          <Calendar className="w-6 h-6 text-blue-600" />
+          <h3 className="text-gray-900">This Month's Featured Destinations</h3>
         </div>
+        <p className="text-gray-600">
+          Special winter travel packages curated for December 2025
+        </p>
       </div>
       
       {/* Carousel container */}
@@ -115,57 +108,44 @@ export function MonthlyDestinations() {
           style={{ scrollbarWidth: 'none', msOverflowStyle: 'none' }}
         >
           {destinations.map((destination, index) => (
-            <button
+            <div 
               key={index}
-              className="group relative rounded-2xl overflow-hidden flex-shrink-0 w-[350px] bg-white shadow-lg hover:shadow-2xl transition-all duration-300"
+              onClick={() => navigate(`/destination/${encodeURIComponent(destination.name)}`)}
+              className="group bg-white rounded-2xl overflow-hidden shadow-md hover:shadow-xl transition-all duration-300 cursor-pointer flex-shrink-0 w-[350px]"
             >
-              {/* Image Container */}
-              <div className="relative h-[240px] overflow-hidden">
+              <div className="relative h-56 overflow-hidden">
                 <img 
-                  src={destination.imageUrl}
-                  alt={destination.title}
+                  src={destination.imageUrl} 
+                  alt={destination.name}
                   className="w-full h-full object-cover group-hover:scale-110 transition-transform duration-300"
                 />
-                
-                {/* Badge */}
-                {destination.badge && (
-                  <div className="absolute top-3 right-3 bg-blue-600 text-white px-3 py-1 rounded-full text-sm font-medium">
-                    {destination.badge}
-                  </div>
-                )}
-
-                {/* Gradient overlay */}
-                <div className="absolute inset-0 bg-gradient-to-t from-black/50 via-transparent to-transparent" />
+                <div className="absolute top-4 right-4 bg-white px-3 py-1 rounded-full flex items-center gap-1">
+                  <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
+                  <span className="text-sm">{destination.rating}</span>
+                </div>
               </div>
-
-              {/* Content */}
+              
               <div className="p-5">
-                <div className="flex items-start justify-between mb-2">
-                  <div className="flex-1">
-                    <h4 className="text-gray-900 font-semibold mb-1 text-left">
-                      {destination.title}
-                    </h4>
-                    <p className="text-gray-600 text-sm text-left">{destination.location}</p>
-                  </div>
-                  <div className="text-right">
-                    <div className="text-blue-600 font-bold text-lg">{destination.price}</div>
-                    <div className="text-xs text-gray-500">per person</div>
-                  </div>
+                <div className="flex items-center gap-2 mb-2">
+                  <MapPin className="w-4 h-4 text-gray-400" />
+                  <span className="text-sm text-gray-500">{destination.country}</span>
                 </div>
-
-                <div className="flex items-center justify-between pt-3 border-t border-gray-100">
-                  <div className="flex items-center gap-1">
-                    <div className="bg-blue-600 text-white px-2 py-0.5 rounded text-sm font-semibold">
-                      {destination.rating}
-                    </div>
-                    <Star className="w-4 h-4 fill-yellow-400 text-yellow-400" />
-                  </div>
-                  <span className="text-xs text-gray-500">
-                    {destination.reviewCount} reviews
-                  </span>
+                
+                <p className="text-gray-800 mb-2">{destination.name}</p>
+                <p className="text-gray-600 text-sm mb-4">{destination.description}</p>
+                
+                <div className="flex flex-wrap gap-2">
+                  {destination.tags.map((tag, tagIndex) => (
+                    <span 
+                      key={tagIndex}
+                      className="px-3 py-1 bg-blue-50 text-blue-600 rounded-full text-xs"
+                    >
+                      {tag}
+                    </span>
+                  ))}
                 </div>
               </div>
-            </button>
+            </div>
           ))}
         </div>
 

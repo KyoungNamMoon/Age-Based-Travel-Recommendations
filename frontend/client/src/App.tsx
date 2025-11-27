@@ -35,7 +35,6 @@ export default function App() {
           <div className="max-w-7xl mx-auto px-6 py-4">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-8">
-                {/* 로고 (클릭 시 홈으로 이동) */}
                 <a href="/" className="flex items-center gap-2">
                   <div className="w-10 h-10 bg-blue-600 rounded-lg flex items-center justify-center">
                     <Plane className="w-6 h-6 text-white" />
@@ -44,10 +43,10 @@ export default function App() {
                 </a>
                 
                 <nav className="hidden md:flex items-center gap-6">
-                  <a href="/" className="text-gray-700 hover:text-blue-600 transition-colors">여행지</a>
-                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">항공</a>
-                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">렌터카</a>
-                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">고객센터</a>
+                  <a href="/" className="text-gray-700 hover:text-blue-600 transition-colors">Destinations</a>
+                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Flights</a>
+                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Car Rentals</a>
+                  <a href="#" className="text-gray-700 hover:text-blue-600 transition-colors">Support</a>
                 </nav>
               </div>
 
@@ -57,7 +56,7 @@ export default function App() {
                   className="flex items-center gap-2 px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors relative"
                 >
                   <SlidersHorizontal className="w-5 h-5" />
-                  <span className="hidden md:inline">필터</span>
+                  <span className="hidden md:inline">Filters</span>
                   {getActiveFilterCount() > 0 && (
                     <span className="absolute -top-1 -right-1 w-5 h-5 bg-red-500 text-white rounded-full flex items-center justify-center text-xs">
                       {getActiveFilterCount()}
@@ -65,10 +64,10 @@ export default function App() {
                   )}
                 </button>
                 <button className="px-4 py-2 text-gray-700 hover:bg-gray-100 rounded-lg transition-colors">
-                  로그인
+                  Sign in
                 </button>
                 <button className="px-5 py-2 bg-blue-600 text-white rounded-lg hover:bg-blue-700 transition-colors">
-                  회원가입
+                  Sign Up
                 </button>
               </div>
             </div>
@@ -96,7 +95,7 @@ export default function App() {
           <RecentSearches />
         </section>
 
-        {/* Filter Sheet (필터 사이드바) */}
+        {/* Filter Sheet */}
         <FilterSheet 
           isOpen={isFilterOpen} 
           onClose={() => setIsFilterOpen(false)}
@@ -104,7 +103,7 @@ export default function App() {
           currentFilters={filters}
         />
 
-        {/* Routes (페이지 이동) */}
+        {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/destination/:destinationId" element={<DestinationDetail />} />

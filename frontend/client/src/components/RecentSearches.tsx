@@ -58,7 +58,7 @@ export function RecentSearches() {
 
   return (
     <div className="max-w-7xl mx-auto px-4 py-8">
-      <h3 className="text-gray-900 mb-4">최근 검색</h3>
+      <h3 className="text-gray-900 mb-4">Your recent searches</h3>
       
       {/* Carousel container */}
       <div className="relative">
