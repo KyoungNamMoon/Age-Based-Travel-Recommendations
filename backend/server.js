@@ -82,7 +82,7 @@ const FIXED_RECOMMENDATIONS = {
   ]
 };
 
-// 
+// Gemini LLM 
 app.get('/api/recommendations', async (req, res) => {
   const CACHE_DURATION = 24 * 60 * 60 * 1000;
 
@@ -160,7 +160,76 @@ app.get('/api/travel-info', async (req, res) => {
   res.json({ city: keyword, attractions: [] });
 });
 
-// [API 4] Refresh Cache
+// [API 4] DestinationDetail
+app.get('/api/destination/:id', async(req,res) => {
+  const { id } = req.params;
+  const { age } = req.query;
+  try {
+    const prompt = `
+    Generate detailed travel information for the destination: "${id}".
+    The target audience is people in their ${age || 'all ages'}.
+  
+    **IMPORTANT REQUIREMENTS:**
+    1. The response MUST be a single valid JSON object.
+    2. All text values (descriptions, highlights, etc.) in English.
+    3. Do not include any conversational text or markdown code blocks (like \`\`\`json).
+  
+    **JSON STRUCTURE:**
+    {
+      "name": "Name of the destination",
+      "country": "Country name",
+      "description": "Short one-line catchphrase",
+      "rating": (float between 4.0 and 5.0),
+      "tags": ["Tag1", "Tag2", "Tag3"],
+      "longDescription": "Detailed description  (at least 3 sentences)",
+      "bestTime": "Best time to visit (e.g., March-May)",
+      "budget": "Estimated budget range in dollar (e.g., $2000 - $3000)",
+      "duration": "Recommended duration" (e.g., 3 days - 5 days),
+      "highlights": ["Highlight 1", "Highlight 2", "Highlight 3", "Highlight 4", "Highlight 5"]
+    }
+    `;
+
+    const result = await model.generateContent(prompt);
+    const geminiResponse = result.response; 
+    let text = geminiResponse.text();
+
+    const jsonMatch = text.match(/\{[\s\S]*\}/);
+    if (jsonMatch) {
+      text = jsonMatch[0];
+    }
+    const destinationData = JSON.parse(text);
+
+    try {
+      const unsplashResponse = await axios.get(`https://api.unsplash.com/search/photos`, {
+        params: { 
+          query: `${id} travel landscape`, 
+          per_page: 1, 
+          orientation: 'landscape' 
+        },
+        headers: { Authorization: `Client-ID ${process.env.UNSPLASH_ACCESS_KEY}` }
+      });
+      
+      if (unsplashResponse.data.results.length > 0) {
+        destinationData.imageUrl = unsplashResponse.data.results[0].urls.regular;
+      } else {
+        
+        destinationData.imageUrl = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000";
+      }
+    } catch (unsplashError) {
+      console.error("Unsplash Fetch Error:", unsplashError.message);
+      destinationData.imageUrl = "https://images.unsplash.com/photo-1488646953014-85cb44e25828?auto=format&fit=crop&q=80&w=1000";
+    }
+
+    res.json(destinationData);
+
+  } catch (error) {
+    console.error("Gemini API 에러:", error);
+    res.status(500).json({ error: "정보를 불러오는 데 실패했습니다." });
+  }
+});
+
+
+// [API 5] Refresh Cache
 app.get('/api/recommendations/refresh', (req, res) => {
   if (fs.existsSync(CACHE_FILE_PATH)) {
     fs.unlinkSync(CACHE_FILE_PATH);
