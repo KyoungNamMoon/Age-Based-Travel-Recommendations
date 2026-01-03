@@ -134,7 +134,7 @@ export function DestinationDetail() {
       <footer className="bg-white border-t border-gray-200 mt-12">
         <div className="max-w-5xl mx-auto px-4 sm:px-6 py-6">
           <p className="text-center text-gray-500 text-sm">
-            © 2024 나이별 여행지 추천 ✨
+            © 2025 TravelHub Powered By Gemini
           </p>
         </div>
       </footer>

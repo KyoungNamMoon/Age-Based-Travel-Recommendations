@@ -2,6 +2,8 @@ import { useState } from "react";
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
 import { Home } from "./components/Home";
 import { Header } from './components/Header';
+import { SignIn } from "./components/SignIn";
+import { SignUp } from "./components/SignUp";
 import { DestinationDetail } from "./components/DestinationDetail";
 import { FilterSheet, FilterValues } from './components/FilterSheet';
 
@@ -32,8 +34,6 @@ export default function App() {
           onFilterClick={() => setIsFilterOpen(true)}
           activeFilterCount={getActiveFilterCount()}
         />
-
-
         {/* Filter Sheet */}
         <FilterSheet 
           isOpen={isFilterOpen} 
@@ -41,11 +41,12 @@ export default function App() {
           onApplyFilters={handleApplyFilters}
           currentFilters={filters}
         />
-
         {/* Routes */}
         <Routes>
           <Route path="/" element={<Home />} />
           <Route path="/destination/:destinationId" element={<DestinationDetail />} />
+          <Route path="/signin" element={<SignIn />} />
+          <Route path="/signup" element={<SignUp />} />
         </Routes>
       </div>
     </Router>
